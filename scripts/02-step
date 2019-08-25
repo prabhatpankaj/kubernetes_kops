@@ -1,0 +1,42 @@
+# Create a cluster configuration
+kops create cluster \
+    --name=${CLUSTER_FULL_NAME} \
+    --zones=${ZONES} \
+    --master-size="t2.small" \
+    --node-size="t2.medium" \
+    --node-count="1" \
+    --dns-zone=${DOMAIN_NAME} \
+    --ssh-public-key="k8sintelycore.pub"
+
+# Review it before the cluster gets created in AWS
+kops edit cluster --name $CLUSTER_FULL_NAME
+
+# Create AWS resources
+kops update cluster --name "$CLUSTER_FULL_NAME" --yes
+
+# Make sure you can access to the cluster
+while ! kops validate cluster --name "$CLUSTER_FULL_NAME"; do
+  echo "Waiting until the cluster is available..."
+  sleep 30
+done
+
+#It will take approximately five minutes for the cluster to be ready. In the meantime, we will create a cluster context alias in your kubeconfig file, which will make things easier for future posts when dealing with multiple clusters:
+
+# To view the cluster contexts, which includes the alias you created:
+
+kubectl config get-contexts
+
+# To check the status of the cluster controlling services running on the master:
+
+kubectl get pods --namespace=kube-system
+
+# Edit the configuration of the nodes instance group:
+
+kops edit ig nodes --name $CLUSTER_FULL_NAME
+
+# update rolling-update
+
+kops rolling-update cluster --force --yes
+
+# delete AWS resources
+kops delete cluster --name "$CLUSTER_FULL_NAME" --yes

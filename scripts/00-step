@@ -1,0 +1,64 @@
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+
+sudo apt-get install -y kubectl
+
+wget https://github.com/kubernetes/kops/releases/download/1.12.3/kops-linux-amd64
+
+chmod +x kops-linux-amd64
+
+sudo mv kops-linux-amd64 /usr/local/bin/kops
+
+sudo apt  install awscli
+
+aws configure
+
+export AWS_DEFAULT_REGION=us-east-1
+
+aws iam create-group --group-name kops
+
+aws iam attach-group-policy --group-name kops \
+    --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess
+
+aws iam attach-group-policy --group-name kops \
+    --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+aws iam attach-group-policy --group-name kops \
+    --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess
+
+aws iam attach-group-policy --group-name kops \
+    --policy-arn arn:aws:iam::aws:policy/IAMFullAccess
+
+aws iam attach-group-policy --group-name kops \
+    --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess
+    
+aws iam attach-group-policy --group-name kops \
+    --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess
+    
+aws iam create-user --user-name kops
+
+aws iam add-user-to-group --user-name kops --group-name kops
+
+aws iam create-access-key --user-name kops >kops-creds
+
+cat kops-creds
+
+sudo apt  install jq
+
+export AWS_ACCESS_KEY_ID=$(cat kops-creds | \
+    jq -r '.AccessKey.AccessKeyId')
+
+export AWS_SECRET_ACCESS_KEY=$(cat kops-creds | \
+    jq -r '.AccessKey.SecretAccessKey')
+
+aws ec2 create-key-pair --key-name k8sintelycore \
+    | jq -r '.KeyMaterial' >k8sintelycore.pem
+
+chmod 400 k8sintelycore.pem
+
+ssh-keygen -y -f k8sintelycore.pem >k8sintelycore.pub
