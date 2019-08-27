@@ -9,7 +9,7 @@ ZONES=${ZONES%?}
 echo $ZONES
 
 # Must change: Your domain name that is hosted in AWS Route 53
-export DOMAIN_NAME="freelab.ml"
+export DOMAIN_NAME="kopslab.ml"
 
 # Friendly name to use as an alias for your cluster
 export CLUSTER_ALIAS="k8sintelycore"
