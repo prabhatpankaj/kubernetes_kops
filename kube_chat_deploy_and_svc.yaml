@@ -24,7 +24,7 @@ spec:
         - name: PORT
           value: "4000"
         - name: PHOENIX_CHAT_HOST
-          value: "chat.kopslab.ml"
+          value: "chat.kopslab.tk"
         - name: MY_POD_IP
           valueFrom:
             fieldRef:
