@@ -1,4 +1,0 @@
-kops delete cluster \
-       --state ${KOPS_STATE_STORE} \
-       --name=${CLUSTER_FULL_NAME} \
-       --yes

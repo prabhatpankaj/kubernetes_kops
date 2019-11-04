@@ -1,3 +1,0 @@
-# Deploy the Phoenix Chat
-
-kubectl create -f kube_chat_deploy_and_svc.yaml
