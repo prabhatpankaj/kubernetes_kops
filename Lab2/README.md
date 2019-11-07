@@ -1,3 +1,16 @@
+## 0. Install Docker 
+
+install docker in ubunru ec2 instance 
+
+```
+curl -sSL https://get.docker.com/ | sh
+
+sudo usermod -aG docker ubuntu
+
+newgrp docker
+
+```
+
 ## 1. Create a container registry for each service
 
 The container registry is going to store the docker container images for both microservices we will deploy:
