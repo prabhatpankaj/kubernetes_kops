@@ -18,3 +18,7 @@ kubectl delete deploy nginx
 kubectl create -f kube_chat_deploy_and_svc.yaml
 
 ```
+# delete chatapp
+```
+kubectl delete -f kube_chat_deploy_and_svc.yaml
+```
