@@ -272,9 +272,24 @@ You will now see three pods with the `characters` name, alongside the existing t
 
 &nbsp;
 
+## 8. Test API
+
 &nbsp;
 
-## 8. Delete ECR
+The external HTTP interface of the API has a basic spec:
+
+- `GET /api/characters` - A list of all characters
+- `GET /api/characters/:id` - Fetch a specific character by ID
+- `GET /api/locations` - A list of all locations
+- `GET /api/locations/:id` - Fetch a specific location by ID
+- `GET /api/characters/by-location/:locationId` - Fetch all characters at a specific location
+- `GET /api/characters/by-gender/:gender` - Fetch all characters of specified gender
+- `GET /api/characters/by-species/:species` - Fetch all characters of specified species
+- `GET /api/characters/by-occupation/:occupation` - Fetch all characters that have specified occupation
+
+&nbsp;
+
+## 9. Delete ECR
 delete the ECR repositories that you created to store the microservice docker images:
 
 ```
