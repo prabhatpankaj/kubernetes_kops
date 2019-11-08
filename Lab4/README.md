@@ -2,7 +2,7 @@
 
 * Helm Architecture
 
-![Helm Architecture](/images/Helm-Architecture-1024x497.png)
+![Helm Architecture](images/Helm-Architecture-1024x497.png)
 
 * Installing helm [Client]
 
