@@ -101,6 +101,57 @@ helm delete nginx-ingress
 
 ```
 
+* Create helm chart:
+
+```
+helm create helm-chart
+
+```
+
+This will create a basic structure for helm, we need to edit a few files to make our app running.
+Update image to be used in values.yaml
+
+```
+image:
+repository: <your username>/<appname>
+tag: latest
+
+```
+
+Again in values.yaml we will update the service port configuration
+
+```
+service:
+type: NodePort
+exposePort: 30000 // expose to node 
+targetPort: 8080 // App server listening on this port
+internalPort: 3000 // Internal exposed within the pod
+
+```
+
+Note: I am using NodePort to test running application on node.
+To learn more about port type visit https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/
+We will use the above port configuration in service.yaml file
+
+```
+spec:
+type: {{ .Values.service.type }}
+ports:
+- nodePort: {{ .Values.service.exposePort }}
+port: {{ .Values.service.internalPort }}
+targetPort: {{ .Values.service.targetPort }}
+```
+
+Now everything is ready.
+Deploy app to cluster:
+
+```
+helm install --name <appname> helm-chart/
+
+```
+
+Congratulation 😃 application is successfully running on kubernetes cluster.
+
 * Remove Helm (Tiller) From Kubernetes Cluster
 
 If you want to remove the tiller installtion from the kubernetes cluster use the following command.
@@ -122,3 +173,4 @@ helm reset --force
 ```
 kubectl delete deployment tiller-deploy --namespace kube-system
 ```
+
