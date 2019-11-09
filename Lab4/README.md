@@ -55,7 +55,7 @@ subjects:
 * Lets create these resources using kubectl
 
 ```
-kubectl apply -f helm-rbac.yam
+kubectl apply -f helm-rbac.yaml
 
 ```
 
@@ -83,7 +83,7 @@ Now lets deploy a sample nginx ingress using helm.
 Execute the following helm install command to deploy an nginx ingress in the kubernetes cluster. It will download the nginx-ingress helm chart from the public github helm chart repo.
 
 ```
-helm install stable/nginx-ingress --name nginx-ingress
+helm install stable/nginx-ingress --name nginx-ingress --set controller.publishService.enabled=true
 
 ```
 
@@ -91,6 +91,59 @@ helm install stable/nginx-ingress --name nginx-ingress
 
 ```
 helm ls
+
+```
+
+* install jenkins using helm chat 
+
+```
+wget https://raw.githubusercontent.com/helm/charts/master/stable/jenkins/values.yaml -O jenkins-values.yaml
+
+helm install stable/jenkins --name=jenkins -f jenkins-values.yaml
+
+```
+
+* create nginx ingress controller for jenkins
+
+```
+# jenkins-ingress.yaml
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: jenkins.yourdomainname.com
+      http:
+        paths:
+          - backend:
+              serviceName: jenkins
+              servicePort: 8080
+            path: /
+```
+
+* apply for jenkins ingress
+
+```
+kubectl apply -f jenkins-ingress.yaml
+
+```
+
+* jenkins user name and password 
+Get your 'admin' user password by running:
+
+```
+printf $(kubectl get secret --namespace default jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+
+```
+
+* install grafana using helm chart 
+
+```
+helm install --name grafana stable/grafana --set=ingress.enabled=True,ingress.hosts={grafana.domain.com} --set rbac.create=true
 
 ```
 
