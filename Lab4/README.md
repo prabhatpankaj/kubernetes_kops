@@ -146,6 +146,12 @@ printf $(kubectl get secret --namespace default jenkins -o jsonpath="{.data.jenk
 helm install --name grafana stable/grafana --set=ingress.enabled=True,ingress.hosts={grafana.domain.com} --set rbac.create=true
 
 ```
+* Insall prometheus using helm chart
+
+```
+
+helm install --name=prometheus stable/prometheus --set  alertmanager.ingress.enabled=True,alertmanager.ingress.hosts={alertmanager.domain.in} --set rbac.create=true
+```
 
 * You can delete the sample deployment using delete command. For example,
 
