@@ -21,7 +21,7 @@ kubectl delete deploy nginx
   value: "chat.poeticoding.com"
           
 ```
-# create chatapp with load balencer
+# create chatapp with load balancer (this is the #1 step to follow after the steps in script is completed)
 ```
 kubectl create -f kube_chat_deploy_and_svc.yaml
 

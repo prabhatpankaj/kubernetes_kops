@@ -24,7 +24,7 @@ spec:
         - name: PORT
           value: "4000"
         - name: PHOENIX_CHAT_HOST
-          value: "chat.poeticoding.com"
+          value: "chat.labkops.tk"
 ---
 kind: Service
 apiVersion: v1
