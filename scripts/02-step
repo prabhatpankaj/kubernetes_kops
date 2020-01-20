@@ -30,6 +30,10 @@ kubectl config get-contexts
 
 kubectl get pods --namespace=kube-system
 
+# get instancegroups
+
+kops get instancegroups --name $CLUSTER_FULL_NAME
+
 # Edit the configuration of the nodes instance group:
 
 kops edit ig nodes --name $CLUSTER_FULL_NAME
