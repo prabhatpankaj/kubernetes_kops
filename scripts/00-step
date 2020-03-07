@@ -1,3 +1,38 @@
+
+* Configure locale in ubuntu
+```
+curl -sL https://raw.githubusercontent.com/prabhatpankaj/ubuntustarter/master/initial.sh | sh
+```
+
+* Install Docker
+```
+sudo su
+
+cd
+
+curl -sSL https://get.docker.com/ | sh
+```
+
+* Create the docker group.
+```
+sudo groupadd docker
+```
+* Add the user to the docker group.
+```
+exit
+sudo usermod -aG docker ubuntu
+newgrp docker
+
+```
+*Log out and log back in to ensure docker runs with correct permissions.
+Start docker.
+```
+sudo service docker start
+
+docker ps
+```
+
+```
 sudo apt-get update && sudo apt-get install -y apt-transport-https
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -62,3 +97,5 @@ aws ec2 create-key-pair --key-name k8sintelycore \
 chmod 400 k8sintelycore.pem
 
 ssh-keygen -y -f k8sintelycore.pem >k8sintelycore.pub
+
+```
