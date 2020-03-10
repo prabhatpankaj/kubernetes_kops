@@ -18,7 +18,7 @@ export CLUSTER_ALIAS="k8sintelycore"
 export CLUSTER_FULL_NAME="${CLUSTER_ALIAS}.${DOMAIN_NAME}"
 
 # Bucket name for state store of kops and Terraform.
-export BUCKET_NAME=k8s-lab-intelycore
+export BUCKET_NAME=kopstestbucket1
 
 aws s3api create-bucket --bucket $BUCKET_NAME \
     --create-bucket-configuration \
