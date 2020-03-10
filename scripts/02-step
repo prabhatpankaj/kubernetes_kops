@@ -2,7 +2,7 @@
 kops create cluster \
     --name=${CLUSTER_FULL_NAME} \
     --zones=${ZONES} \
-    --master-size="t2.small" \
+    --master-size="t2.medium" \
     --node-size="t2.medium" \
     --node-count="1" \
     --dns-zone=${DOMAIN_NAME} \
