@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export AWS_DEFAULT_REGION=us-east-1
 
 export AWS_ACCESS_KEY_ID=$(cat kops-creds | \
