@@ -3,7 +3,9 @@
 * First run the yaml configuration of kops dashboard add-on:
 
 ```
-kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.8.3.yaml 
+wget https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.10.1.yaml
+kubectl create -f v1.10.1.yaml
+
 ```
 
 * Go to URL that got created:To get the URL:
