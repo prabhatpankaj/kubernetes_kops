@@ -11,3 +11,9 @@ kops create cluster \
 
 
 kops update cluster --name "$CLUSTER_FULL_NAME" --yes
+
+
+while ! kops validate cluster --name "$CLUSTER_FULL_NAME"; do
+  echo "Waiting until the cluster is available..."
+  sleep 30
+done
