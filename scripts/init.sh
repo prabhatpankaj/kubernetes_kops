@@ -1,3 +1,5 @@
+#!/bin/bash
+
 kops create cluster \
     --name=${CLUSTER_FULL_NAME} \
     --zones=${ZONES} \
