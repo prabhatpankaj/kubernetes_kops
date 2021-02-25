@@ -9,16 +9,16 @@ ZONES=${ZONES%?}
 echo $ZONES
 
 # Must change: Your domain name that is hosted in AWS Route 53
-export DOMAIN_NAME="kopslab.ml"
+export DOMAIN_NAME="prabhatpankaj.me"
 
 # Friendly name to use as an alias for your cluster
-export CLUSTER_ALIAS="k8sintelycore"
+export CLUSTER_ALIAS="k8slab"
 
 # Leave as-is: Full DNS name of you cluster
 export CLUSTER_FULL_NAME="${CLUSTER_ALIAS}.${DOMAIN_NAME}"
 
 # Bucket name for state store of kops and Terraform.
-export BUCKET_NAME=kopstestbucket1
+export BUCKET_NAME=kopsprabhat
 
 aws s3api create-bucket --bucket $BUCKET_NAME \
     --create-bucket-configuration \
