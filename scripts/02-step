@@ -12,7 +12,7 @@ kops create cluster \
 kops edit cluster --name $CLUSTER_FULL_NAME
 
 # Create AWS resources
-kops update cluster --name "$CLUSTER_FULL_NAME" --yes
+kops update cluster --name "$CLUSTER_FULL_NAME" --yes --admin
 
 # Make sure you can access to the cluster
 while ! kops validate cluster --name "$CLUSTER_FULL_NAME"; do
