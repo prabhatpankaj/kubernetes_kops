@@ -24,7 +24,7 @@ spec:
         - name: PORT
           value: "4000"
         - name: PHOENIX_CHAT_HOST
-          value: "chat.learnix.in"
+          value: "chat.prabhatpankaj.me"
 ---
 kind: Service
 apiVersion: v1
