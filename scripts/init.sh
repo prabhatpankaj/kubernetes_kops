@@ -10,7 +10,7 @@ kops create cluster \
     --ssh-public-key="k8sintelycore.pub"
 
 
-kops update cluster --name "$CLUSTER_FULL_NAME" --yes
+kops update cluster --name "$CLUSTER_FULL_NAME" --yes --admin
 
 
 while ! kops validate cluster --name "$CLUSTER_FULL_NAME"; do
